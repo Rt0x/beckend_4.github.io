@@ -1,6 +1,5 @@
 <?php
 require_once ('db.php');
-// require_once ('prob.php');
 $login = $_POST['fio'];
 $tel = $_POST['tel'];
 $email = $_POST['email'];
