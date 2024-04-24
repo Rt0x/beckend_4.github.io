@@ -126,7 +126,7 @@ try {
         }
         setcookie('checkt_value', $_POST['checkt'], time() + 12 * 30 * 24 * 60 * 60);
         if ($errors) {
-            header('Location: db.php');
+            header('Location: global.php');
             exit();
         } else {
             setcookie('fio_error', '', 100000);
@@ -138,7 +138,7 @@ try {
             setcookie('checkt_error', '', 100000);
         }
 
-        $stmt = $db->prepare("INSERT INTO osnova (Name, phone,email,birth_date,gender,Biographi,contract_agreed) VALUES (:Name, :phone,:email,:birth_date,:gender,:Biographi,:contract_agreed)");
+        $stmt = $global->prepare("INSERT INTO osnova (Name, phone,email,birth_date,gender,Biographi,contract_agreed) VALUES (:Name, :phone,:email,:birth_date,:gender,:Biographi,:contract_agreed)");
         $login = $_POST['fio'];
         $email = $_POST['email'];
         $tel = $_POST['tel'];
@@ -154,16 +154,16 @@ try {
         $stmt->bindParam(':Biographi', $bio);
         $stmt->bindParam(':contract_agreed', $checkt);
         $stmt->execute();
-        $user_id = $db->lastInsertId();
+        $user_id = $global->lastInsertId();
         $Languages = $_POST['language'];
         foreach ($Languages as $language_name) {
-            $stmt = $db->prepare("INSERT INTO osnova_languages (user_id, language_name) VALUES (:user_id,:language_name)");
+            $stmt = $global->prepare("INSERT INTO osnova_languages (user_id, language_name) VALUES (:user_id,:language_name)");
             $stmt->bindParam(':user_id', $user_id);
             $stmt->bindParam(':language_name', $language_name);
             $stmt->execute();
         }
         setcookie('save', '1');
-        header('Location: db.php');
+        header('Location: global.php');
     }
 } catch (PDOException $e) {
     print ('Error : ' . $e->getMessage());
