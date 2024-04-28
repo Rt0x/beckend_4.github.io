@@ -121,17 +121,17 @@
                     <label for="validationCustom04" class="form-label">Любимый язык программирования</label>
                     <select class="form-select rounded-pill" id="validationCustom04" multiple name="language[]">
                         <option selected="" disabled="" value="">Выберете</option>
-                        <option value="1">Pascal</option>
-                        <option value=" 2">C</option>
-                        <option value=" 3">C++</option>
-                        <option value=" 4">JavaScript</option>
-                        <option value=" 5">PHP</option>
-                        <option value=" 6">Python</option>
-                        <option value=" 7"> Java</option>
-                        <option value=" 8">Haskel</option>
-                        <option value=" 9">Clojure</option>
-                        <option value=" 10">Prolog</option>
-                        <option value=" 11">Scala</option>
+                        <option value="1" <?php if(isset($_COOKIE['language_value']) && in_array('1', unserialize($_COOKIE['language_value']))) { echo 'selected'; } ?>>Pascal</option>
+                        <option value="2" <?php if(isset($_COOKIE['language_value']) && in_array('2', unserialize($_COOKIE['language_value']))) { echo 'selected'; } ?>>C</option>
+                        <option value="3" <?php if(isset($_COOKIE['language_value']) && in_array('3', unserialize($_COOKIE['language_value']))) { echo 'selected'; } ?>>C++</option>
+                        <option value="4" <?php if(isset($_COOKIE['language_value']) && in_array('4', unserialize($_COOKIE['language_value'])))  {echo 'selected';}  ?>>JavaScript</option>
+                        <option value="5" <?php if(isset($_COOKIE['language_value']) && in_array('5', unserialize($_COOKIE['language_value'])))  {echo 'selected';}  ?>>PHP</option>
+                        <option value="6" <?php if(isset($_COOKIE['language_value']) && in_array('6', unserialize($_COOKIE['language_value'])))  {echo 'selected';} ?>>Python</option>
+                        <option value="7" <?php if(isset($_COOKIE['language_value']) && in_array('7', unserialize($_COOKIE['language_value'])))  {echo 'selected';}  ?>>Java</option>
+                        <option value="8" <?php if(isset($_COOKIE['language_value']) && in_array('8', unserialize($_COOKIE['language_value'])))  {echo 'selected';}  ?>>Haskell</option>
+                        <option value="9" <?php if(isset($_COOKIE['language_value']) && in_array('9', unserialize($_COOKIE['language_value'])))  {echo 'selected';} ?>>Clojure</option>
+                        <option value="10" <?php if(isset($_COOKIE['language_value']) && in_array('10', unserialize($_COOKIE['language_value'])))   {echo 'selected';} ?>>Prolog</option>
+                        <option value="11" <?php if(isset($_COOKIE['language_value']) && in_array('11', unserialize($_COOKIE['language_value'])))  {echo 'selected';} ?>>Scala</option>
                     </select>
                     <div class=" invalid-feedback">
                     </div>
