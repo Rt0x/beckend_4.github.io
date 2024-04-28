@@ -101,8 +101,8 @@
                 <div class="col-auto">
                     <p>Выберите ваш пол:<br /></p>
                     <div class="form-check icheck-material-orange">
-                        <input class="form-check-input" type="radio" value="Женский" id="someRadioId1" <?php echo isset($_COOKIE['someGroupName_value']) && $_COOKIE['someGroupName_value'] === 'Женский' ? 'checked' : ''; ?>>
-                        name="someGroupName" />
+                        <input class="form-check-input" type="radio" value="Женский" id="someRadioId1" <?php echo isset($_COOKIE['someGroupName_value']) && $_COOKIE['someGroupName_value'] === 'Женский' ? 'checked' : ''; ?>
+                        name="someGroupName" >
                         <label class="form-check-label" for="someRadioId1">Женский</label>
                     </div>
                     <div class="form-check icheck-material-orange">
