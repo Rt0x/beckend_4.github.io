@@ -143,8 +143,10 @@
                 <div class="col-auto">
                     <label>
                         Биография:<br />
-                        <textarea class="form-control rounded-pill" placeholder="Напишите свою биографию"
-                            name="bio"></textarea>
+                        <textarea class="form-control rounded-pill" placeholder="Напишите свою биографию" name="bio"
+                            <?php if (isset($_COOKIE['bio_error']) && $_COOKIE['bio_error'] === '1') {
+                                print 'class="error"';
+                            } ?>><?php echo isset($_COOKIE['bio_value']) ? $_COOKIE['bio_value'] : ''; ?></textarea>
                     </label>
                 </div>
 
@@ -155,11 +157,12 @@
                 <div class="col-auto">
                     С контрактом:
                     <div class="form-check icheck-material-orange">
-                        <input class="form-check-input" type="checkbox" value="Ознакомлен" id="invalidCheck"
-                            name="checkt" <?php if ($errors['checkt']) {
-                                print 'class="error"';
-                            } ?>
-                     value="<?php print $values['checkt']; ?>" />
+                    <input class="form-check-input" type="checkbox" <?php if (isset($_COOKIE['checkt_error']) && $_COOKIE['checkt_error'] === '1') {
+                            print 'class="error"';
+                        } ?> value="Ознакомлен" id="invalidCheck" name="checkt"
+                        <?php if (isset($_COOKIE['checkt_value']) && $_COOKIE['checkt_value'] === 'Ознакомлен') {
+                            print 'checked';
+                        } ?> />
                         <label class="form-check-label" for="invalidCheck">
                             Ознакомлен (а)
                         </label>
