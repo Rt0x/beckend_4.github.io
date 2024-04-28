@@ -38,6 +38,7 @@ try {
         $errors['email'] = !empty($_COOKIE['email_error']);
         $errors['date'] = !empty($_COOKIE['date_error']);
         $errors['someGroupName'] = !empty($_COOKIE['someGroupName_error']);
+        $errors['language'] = !empty($_COOKIE['language_error']);
         $errors['bio'] = !empty($_COOKIE['bio_error']);
         $errors['checkt'] = !empty($_COOKIE['checkt_error']);
         if ($errors['fio']) {
@@ -60,6 +61,11 @@ try {
             setcookie('date_value', '', 100000);
             $messages[] = '<div class="error">Выберите дату(Вам нет 18 лет).</div>';
         }
+        if ($errors['language']) {
+            setcookie('language_error', '', 100000);
+            setcookie('language_value', '', 100000);
+            $messages[] = '<div class="error">Вы не выбрали языки программирования.</div>';
+        }
         if ($errors['someGroupName']) {
             setcookie('someGroupName_error', '', 100000);
             setcookie('someGroupName_value', '', 100000);
@@ -76,13 +82,14 @@ try {
             $messages[] = '<div class="error">Вы не ознакомились с правилами.</div>';
         }
         $values = array();
-        $values['fio'] = empty($_COOKIE['fio_value']) ? '' : $_COOKIE['fio_value'];
-        $values['tel'] = empty($_COOKIE['tel_value']) ? '' : $_COOKIE['tel_value'];
-        $values['email'] = empty($_COOKIE['email_value']) ? '' : $_COOKIE['email_value'];
-        $values['date'] = empty($_COOKIE['date_value']) ? '' : $_COOKIE['date_value'];
-        $values['someGroupName'] = empty($_COOKIE['someGroupName_value']) ? '' : $_COOKIE['someGroupName_value'];
-        $values['bio'] = empty($_COOKIE['bio_value']) ? '' : $_COOKIE['bio_value'];
-        $values['checkt'] = empty($_COOKIE['checkt_value']) ? '' : $_COOKIE['checkt_value'];
+        $values['fio'] = empty($_COOKIE['fio_value']) ? '' : strip_tags($_COOKIE['fio_value']);
+        $values['tel'] = empty($_COOKIE['tel_value']) ? '' : strip_tags($_COOKIE['tel_value']);
+        $values['email'] = empty($_COOKIE['email_value']) ? '' : strip_tags($_COOKIE['email_value']);
+        $values['date'] = empty($_COOKIE['date_value']) ? '' : strip_tags($_COOKIE['date_value']);
+        $values['someGroupName'] = empty($_COOKIE['someGroupName_value']) ? '' : strip_tags($_COOKIE['someGroupName_value']);
+        $values['bio'] = empty($_COOKIE['bio_value']) ? '' : strip_tags($_COOKIE['bio_value']);
+        $values['checkt'] = empty($_COOKIE['checkt_value']) ? '' : strip_tags($_COOKIE['checkt_value']);
+        $values['language'] = empty($_COOKIE['language_value']) ? '' : strip_tags($_COOKIE['language_value']);
         include ('index.php');
     } else {
         $errors = FALSE;
@@ -125,6 +132,14 @@ try {
             $errors = TRUE;
         }
         setcookie('checkt_value', $_POST['checkt'], time() + 12 * 30 * 24 * 60 * 60);
+        if (empty($_POST['language'])) {
+            setcookie('language_error', '1', time() + 24 * 60 * 60);
+            $errors = TRUE;
+
+        } else {
+            $selected_languages = $_POST['language'];
+            setcookie('language_value', serialize($selected_languages), time() + 12 * 30 * 24 * 60 * 60);
+        }
         if ($errors) {
             header('Location: global.php');
             exit();
@@ -136,6 +151,7 @@ try {
             setcookie('someGroupName_error', '', 100000);
             setcookie('bio_error', '', 100000);
             setcookie('checkt_error', '', 100000);
+            setcookie('language_error', '', 100000);
         }
 
         $stmt = $global->prepare("INSERT INTO osnova (Name, phone,email,birth_date,gender,Biographi,contract_agreed) VALUES (:Name, :phone,:email,:birth_date,:gender,:Biographi,:contract_agreed)");
